@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="scan.png">
+    <title>Presentation</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Progress Bar Styles */
+        .progress-bar {
+            width: 100%;
+            background-color: #f8f9fa;
+            height: 5px;
+        }
+
+        .progress-fill {
+            width: 0;
+            height: 100%;
+            background-color: #00bcd4;
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Presentation Container */
+        #presentation-container {
+            flex-grow: 1;
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 65px);
+            /* Full height minus nav and progress bar */
+        }
+
+        /* Slide Styles */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease-in-out, visibility 0.6s;
+            background-color: #ffffff;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Specific alignment for some slides */
+        .center-content {
+            justify-content: center;
+        }
+
+        /* Content Styling */
+        .slide h1,
+        .slide h2,
+        .slide h3 {
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+
+        .slide h1 {
+            font-size: 2.8em;
+        }
+
+        .slide h2 {
+            font-size: 2.4em;
+        }
+
+        .slide h3 {
+            font-size: 1.8em;
+        }
+
+        .slide p,
+        .slide li {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333333;
+        }
+
+        .slide strong {
+            color: #0066cc;
+        }
+
+        /* Images */
+        .slide img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Layout Helpers */
+        .slide-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .slide-content.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .slide-text {
+            flex: 1;
+            text-align: left;
+            max-width: 50%;
+        }
+
+        .slide-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .grid-cols-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 40px;
+            text-align: left;
+            width: 60%;
+        }
+
+        /* Table Styles */
+        table {
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            border: 1px solid #444;
+        }
+
+        thead th {
+            background-color: #00796b;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-of-type(even) {
+            background-color: #f8f9fa;
+        }
+
+        tfoot {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        /* Navigation Buttons */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #ffffff;
+            height: 60px;
+            box-sizing: border-box;
+        }
+
+        .nav-btn {
+            display: none;
+        }
+
+        #slide-counter {
+            margin: 0 20px;
+            font-size: 1.2em;
+            color: #333333;
+        }
+
+        /* Reveal animation for elements */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <div id="presentation-container">
+
+        <div id="slide-1" class="slide">
+            <img src="logo.png" alt="University of Tlemcen Logo"
+                style="width: 150px; height: auto; margin-bottom: 20px;">
+            <p>Aboubakr Belkaïd University – Tlemcen –</p>
+            <p style="text-align: center; font-size: 1.2em; margin: 10px 0;">Faculty of TECHNOLOGY | MASTER | Biomedical
+                Engineering - Specialty: Medical Imaging</p>
+            <h1>Exploitation of Breast Ultrasound Image Segmentation in Breast Cancer Diagnosis
+            </h1>
+            <div style="margin-top: 20px;">
+                <p><strong>Presented by:</strong></p>
+                <p>Abdelmoghith houari | Sohaib kartali | Fethallah Hadj bouziane</p>
+            </div>
+
+        </div>
+
+        <div id="slide-2" class="slide">
+            <h2>Presentation Outline</h2>
+            <div class="grid-cols-2">
+                <p>➊ Introduction</p>
+                <p>➍ Methodology and Model</p>
+                <p>➋ Problem Statement</p>
+                <p>➎ Results and Discussion</p>
+                <p>➌ Work Objectives</p>
+                <p>➏ Conclusion and Perspectives</p>
+            </div>
+        </div>
+
+        <div id="slide-3" class="slide">
+            <h2>Introduction</h2>
+            <h3>Breast Cancer</h3>
+            <div class="slide-content">
+                <div class="slide-text">
+                    <p>Breast cancer is the <strong>most common cancer</strong> in women, representing about 25% of all female cancers.</p>
+                    <p>Each year, more than <strong>2.3 million new cases</strong> are diagnosed worldwide, causing about 685,000 deaths.</p>
+                    <p>Thanks to early detection and medical advances, the 5-year survival rate now exceeds <strong>90%</strong> in developed countries.</p>
+                </div>
+                <div class="slide-image">
+                    <img src="image3.png" alt="Donut chart of breast cancer distribution"
+                        style="max-width: 300px; height: auto;">
+                    <p
+                        style="font-size: 0.8em; text-align: center; margin-top: 10px; color: #b0b0b0; font-style: italic;">
+                        Sung, H., Ferlay, J., Siegel, R. L., Laversanne, M., Soerjomataram, I., Jemal, A., & Bray, F.
+                        (2021). Global cancer statistics 2020: GLOBOCAN estimates of incidence and mortality worldwide
+                        for 36 cancers in 185 countries. CA: a cancer journal for clinicians, 71(3), 209-249.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-4" class="slide">
+            <h2>Introduction</h2>
+            <h3>Diagnostic Methods</h3>
+            <div class="slide-content">
+                <div class="slide-text">
+                    <p>Ultrasound plays a <strong>key role</strong> in breast cancer diagnosis.</p>
+                    <p>It allows for detection and characterization of lesions, differentiation between benign and malignant masses, guidance of biopsies, and assessment of treatment evolution.</p>
+                    <p>It is a <strong>non-invasive, fast</strong> tool complementary to mammography.</p>
+                </div>
+                <div class="slide-image">
+                    <img src="image4.png" alt="Ultrasound machine">
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-5" class="slide">
+            <h2>Problem Statement and Work Objectives</h2>
+            <div class="slide-content reverse">
+                <div class="slide-text">
+                    <p>Manual delineation of breast tumors is <strong>difficult</strong> and depends on the radiologist's expertise.</p>
+                    <p>To improve diagnostic reliability, we compared classical segmentation methods — Region Growing, K-means and Active Contours — with the <strong>U-Net</strong> model, to develop an <strong>automatic and precise</strong> tool.</p>
+                </div>
+                <div class="slide-image">
+                    <img src="image5.png" alt="Radiologist looking at a screen">
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-6" class="slide">
+            <h2>Methodology and Model</h2>
+            <h3>Dataset Description</h3>
+            <div class="slide-content">
+                <div class="slide-text" style="max-width: 100%;">
+                    <ul>
+                        <li>Breast ultrasound images were collected at Baheya Hospital in 2018 from <strong>600 women</strong> aged 25 to 75.</li>
+                        <li>The final dataset includes <strong>780 images</strong> (PNG, 500×500 pixels), distributed as:
+                            <ul>
+                                <li style="color: #66bb6a;"><strong>Benign:</strong> 437</li>
+                                <li style="color: #ef5350;"><strong>Malignant:</strong> 210</li>
+                                <li><strong>Normal:</strong> 133</li>
+                            </ul>
+                        </li>
+                        <li>Each image has a ground truth mask created in MATLAB.</li>
+                        <li>All data were processed respecting patient confidentiality.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-7" class="slide">
+            <h2>Methodology and Model</h2>
+            <h3>Database Limitations</h3>
+            <div class="slide-text" style="text-align: center; max-width: 60%;">
+                <ul>
+                    <li><strong>Limited dataset size (780 images)</strong> → risk of overfitting.</li>
+                    <li><strong>Manual segmentation</strong> → dependent on radiologist expertise and possible human error.</li>
+                    <li><strong>Differences between devices and cropping</strong> → loss of information and lack of uniformity.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="slide-8" class="slide">
+            <h2>Methodology and Model</h2>
+            <h3>State of the Art: Why U-Net?</h3>
+            <div style="max-w-4xl; space-y-8; text-align: left;">
+                <div
+                    style="background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <h3 style="color: #d63384;">Limitations of Classical Methods</h3>
+                    <p>Tumor segmentation initially relied on classical methods like Region Growing, K-means and active contours, but these remain limited as they are sensitive to noise and highly dependent on chosen parameters.</p>
+                </div>
+                <div
+                    style="background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <h3 style="color: #0066cc;">The Advent of Deep Learning</h3>
+                    <p>Deep Learning, with CNN networks, allows automatic learning of image features and makes the model more precise. <strong>U-Net</strong> has become widely used in medical segmentation thanks to its U-shape and connections between layers.</p>
+                </div>
+                <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px;">
+                    <h3 style="color: #6f42c1;">Recent and High-Performance Architectures</h3>
+                    <p style="color: #333333;">Its recent versions like <strong>DBU-Net (2020), Improved U-Net (2024), HMA-Net (2025), and Attention U-Net (2025)</strong> make segmentation even more performant.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-11" class="slide">
+            <h2>Methodology and Model</h2>
+            <div style="display: flex; gap: 20px; max-width: 90%; text-align: left;">
+                <div
+                    style="flex: 1; background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #0066cc;">1. Data Preprocessing</h3>
+                    <ul style="list-style-type: disc; padding-left: 20px; color: #333333;">
+                        <li><strong>Resizing:</strong> All images and masks to 256×256 pixels for consistency.</li>
+                        <li><strong>Normalization:</strong> Intensities scaled to [0, 1] by dividing by 255.</li>
+                        <li><strong>Data augmentation:</strong> Rotation, flipping, zoom, brightness and contrast adjustment.</li>
+                        <li><strong>Noise reduction:</strong> Filters applied to improve readability while preserving edges.</li>
+                    </ul>
+                </div>
+                <div
+                    style="flex: 1; background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #0066cc;">2. U-Net Training Parameters</h3>
+                    <ul style="list-style-type: disc; padding-left: 20px; color: #333333;">
+                        <li><strong>Split:</strong> 70% training, 15% validation, 15% test.</li>
+                        <li><strong>Loss function:</strong> BCE + Dice Loss for class imbalance.</li>
+                        <li><strong>Optimizer:</strong> Adam, initial learning rate = 0.001.</li>
+                        <li><strong>Number of epochs:</strong> 50, batch size = 16.</li>
+                        <li><strong>Environment:</strong> Python, TensorFlow/Keras, Kaggle Platform.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-13" class="slide">
+            <h2>Results and Discussion</h2>
+
+            <!-- Compact image layout -->
+            <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 15px;">
+                <div style="background-color: white; padding: 8px; border-radius: 6px; flex: 1; max-width: 30%;">
+                    <img src="accuracy.png" alt="Training and Validation Accuracy Curves"
+                        style="max-width: 100%; height: auto; display: block;">
+                </div>
+                <div style="background-color: white; padding: 8px; border-radius: 6px; flex: 1; max-width: 30%;">
+                    <img src="loss.png" alt="Training and Validation Loss Curves"
+                        style="max-width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <!-- Main content in single column for better space usage -->
+            <div style="text-align: left; max-width: 95%; margin: 0 auto; line-height: 1.5;">
+                <p style="margin-bottom: 15px;">The U-Net model was evaluated on the test set with excellent
+                    performance:</p>
+
+                <!-- Compact metrics table -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #0066cc; margin-bottom: 10px;">Performance Metrics</h3>
+                    <table
+                        style="width: 100%; border-collapse: collapse; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; overflow: hidden; font-size: 0.9em;">
+                        <thead>
+                            <tr style="background-color: #00796b; color: white;">
+                                <th style="padding: 8px; text-align: left;">Metric</th>
+                                <th style="padding: 8px; text-align: center;">Score</th>
+                                <th style="padding: 8px; text-align: center;">%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #444;">
+                                <td style="padding: 8px; font-weight: bold; color: #0066cc;">Accuracy</td>
+                                <td style="padding: 8px; text-align: center; font-family: monospace;">0.923470</td>
+                                <td style="padding: 8px; text-align: center; font-weight: bold; color: #00ff88;">92.35
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #444;">
+                                <td style="padding: 8px; font-weight: bold; color: #0066cc;">Precision</td>
+                                <td style="padding: 8px; text-align: center; font-family: monospace;">0.835193</td>
+                                <td style="padding: 8px; text-align: center; font-weight: bold; color: #00ff88;">83.52
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #444;">
+                                <td style="padding: 8px; font-weight: bold; color: #0066cc;">Recall</td>
+                                <td style="padding: 8px; text-align: center; font-family: monospace;">0.859654</td>
+                                <td style="padding: 8px; text-align: center; font-weight: bold; color: #00ff88;">85.97
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold; color: #0066cc;">F1-Score</td>
+                                <td style="padding: 8px; text-align: center; font-family: monospace;">0.892965</td>
+                                <td style="padding: 8px; text-align: center; font-weight: bold; color: #00ff88;">89.30
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-14" class="slide">
+            <h2>Results and Discussion</h2>
+            <h3>Results Analysis</h3>
+            <div style="text-align: left; max-width: 80%; margin: 0 auto; line-height: 1.5;">
+                <ul style="margin-left: 15px; font-size: 1.1em;">
+                    <li><strong>Excellent overall accuracy:</strong> 92.35% on the test set</li>
+                    <li><strong>Good precision/recall balance:</strong> F1-Score of 89.30%</li>
+                    <li><strong>Robust performance:</strong> Effective generalization despite limited dataset</li>
+                    <li><strong>Ready for medical application:</strong> Very satisfactory metrics</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="slide-16" class="slide">
+            <h2>Results and Discussion</h2>
+            <h3>Visual Examples of U-Net Segmentation</h3>
+            <table style="width: 100%; max-width: 1200px;">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Type</th>
+                        <th>Original Image</th>
+                        <th>Original Mask</th>
+                        <th>Predicted Mask (CNN)</th>
+                        <th>Overlay</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">CNN (U-Net)</td>
+                        <td style="color: #66bb6a; font-weight: bold;">Benign Case</td>
+                        <td><img src="image14.png" style="width:128px;"></td>
+                        <td><img src="image15.png" style="width:128px; background: black;"></td>
+                        <td><img src="image16.png" style="width:128px; background: black;"></td>
+                        <td><img src="image17.png" style="width:128px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #ef5350; font-weight: bold;">Malignant Case</td>
+                        <td><img src="image18.png" style="width:128px;"></td>
+                        <td><img src="image19.png" style="width:128px; background: black;"></td>
+                        <td><img src="image20.png" style="width:128px; background: black;"></td>
+                        <td><img src="image21.png" style="width:128px;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="slide-17" class="slide">
+            <h2>Results and Discussion</h2>
+            <h3>Morphological Feature Extraction</h3>
+            <p>Segmentation allows extraction of quantitative measurements to aid in diagnosis.</p>
+            <div style="display: flex; gap: 20px; max-width: 95%; text-align: left; margin-top: 20px;">
+                <div
+                    style="flex: 1; background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px;">
+                    <img src="image22.png" style="width:100%; height: auto; margin-bottom: 10px;">
+                    <h3 style="color: #66bb6a;">Features (Benign)</h3>
+                </div>
+                <div
+                    style="flex: 1; background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px;">
+                    <img src="image23.png" style="width:100%; height: auto; margin-bottom: 10px;">
+                    <h3 style="color: #ef5350;">Features (Malignant)</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-18" class="slide">
+            <h2>Work Conclusion</h2>
+            <p>This work enabled the development and evaluation of a <strong>U-Net</strong> model dedicated to breast tumor segmentation in ultrasound.</p>
+            <p>The set objectives were achieved, with results of <strong>Dice ≈ 0.98</strong> and <strong>Jaccard ≈ 0.97</strong>, reflecting an excellent concordance between predicted masks and ground truth.</p>
+            <p>These performances demonstrate the model's effectiveness and its potential impact on medical diagnosis, by facilitating precise detection and delineation of lesions.</p>
+        </div>
+
+        <div id="slide-19" class="slide">
+            <h2>Developed Application</h2>
+            <h3>Main Interface</h3>
+            <div style="text-align: center;">
+                <img src="app/1.jpg" alt="Main application interface" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
+                <p style="font-size: 1.2em; margin-top: 20px; color: #333;">Main interface of the automatic segmentation application</p>
+            </div>
+        </div>
+
+        <div id="slide-20" class="slide">
+            <h2>Developed Application</h2>
+            <h3>Image Loading</h3>
+            <div style="text-align: center;">
+                <img src="app/2.jpg" alt="Image loading and preprocessing" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
+                <p style="font-size: 1.2em; margin-top: 20px; color: #333;">Module for loading and preprocessing ultrasound images</p>
+            </div>
+        </div>
+
+        <div id="slide-21" class="slide">
+            <h2>Developed Application</h2>
+            <h3>Segmentation Results</h3>
+            <div style="text-align: center;">
+                <img src="app/3.jpg" alt="Segmentation results" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
+                <p style="font-size: 1.2em; margin-top: 20px; color: #333;">Display of segmentation results with the U-Net model</p>
+            </div>
+        </div>
+
+        <div id="slide-22" class="slide">
+            <h2>Developed Application</h2>
+            <h3>Analysis and Metrics</h3>
+            <div style="text-align: center;">
+                <img src="app/4.jpg" alt="Analysis and metrics" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
+                <p style="font-size: 1.2em; margin-top: 20px; color: #333;">Analysis module and performance metrics calculation</p>
+            </div>
+        </div>
+
+        <div id="slide-23" class="slide">
+            <h2>Limitations and Perspectives</h2>
+            <div class="slide-content" style="max-width: 80%;">
+                <div class="slide-text"
+                    style="background-color: rgba(211, 47, 47, 0.3); padding: 20px; border-radius: 8px;">
+                    <h3>Limitations</h3>
+                    <p>The model was only tested on a <strong>restricted and homogeneous</strong> database, which limits its generalization.</p>
+                </div>
+                <div class="slide-text"
+                    style="background-color: rgba(76, 175, 80, 0.3); padding: 20px; border-radius: 8px;">
+                    <h3>Perspectives</h3>
+                    <ul style="list-style-type: disc; padding-left: 20px; color: #333333;">
+                        <li>Extend evaluation to a more varied dataset.</li>
+                        <li>Integrate automatic classification (benign/malignant).</li>
+                        <li>Explore advanced architectures (Attention U-Net).</li>
+                        <li>Adapt to other modalities (MRI, mammography).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-24" class="slide">
+            <h2 style="font-size: 3.5em;">Thank you for your attention</h2>
+            <p style="font-size: 1.8em; color: #bdbdbd;">I am available to answer your questions.</p>
+        </div>
+
+    </div>
+
+    <div class="navigation">
+        <button id="prev-btn" class="nav-btn">&lt; Previous</button>
+        <span id="slide-counter">1 / 24</span>
+        <button id="next-btn" class="nav-btn">Next &gt;</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = Array.from(document.querySelectorAll('.slide'));
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            const progressFill = document.getElementById('progress-fill');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                // Remove active from all slides
+                slides.forEach(slide => slide.classList.remove('active'));
+
+                // Show current slide
+                slides[index].classList.add('active');
+
+                // Update progress bar
+                const progress = ((index + 1) / totalSlides) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                // Update counter and button states
+                slideCounter.textContent = `${index + 1} / ${totalSlides}`;
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === totalSlides - 1;
+
+                // Clear previous animations and trigger new ones
+                const elements = slides[index].querySelectorAll('h1, h2, h3, p, img, table, li, div > div, td, th');
+                elements.forEach(el => {
+                    el.classList.remove('reveal');
+                    // void el.offsetWidth; // Trigger reflow
+                });
+
+                setTimeout(() => {
+                    elements.forEach((el, i) => {
+                        el.style.animationDelay = `${i * 0.1}s`;
+                        el.classList.add('reveal');
+                    });
+                }, 100); // A small delay to ensure classes are removed before being added
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextBtn.click();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevBtn.click();
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    currentSlide = 0;
+                    showSlide(currentSlide);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    currentSlide = totalSlides - 1;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Touch/swipe support
+            let startX = 0;
+            let endX = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            document.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+
+                if (Math.abs(diff) > 50) { // Minimum swipe distance
+                    if (diff > 0 && currentSlide < totalSlides - 1) {
+                        nextBtn.click();
+                    } else if (diff < 0 && currentSlide > 0) {
+                        prevBtn.click();
+                    }
+                }
+            });
+
+            // Initial setup
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+
+</html>
